@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.img {
+  height: 50px;
+  box-shadow: 2px 2px 5px;
+}
+.header {
+  height: 150px;
+}
+.user {
+  height: 200px;
+  box-shadow: 2px 2px 5px;
+  position: relative;
+  top: -100px;
+}
