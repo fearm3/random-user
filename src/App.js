@@ -12,10 +12,13 @@ function App() {
             With supporting text below as a natural lead-in to additional
             content.
           </Card.Text>
-          
-
-
-
+          <Row>
+           
+            <Col xs={6} md={4}>
+              <Image src="holder.js/171x180" roundedCircle />
+            </Col>
+            
+          </Row>
 
           <div className="btn">
             <Button variant="primary">Go somewhere</Button>
