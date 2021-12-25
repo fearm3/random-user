@@ -7,14 +7,21 @@ import growingMan from "../assets/growing-up-man.svg";
 import growingWoman from "../assets/growing-up-woman.svg";
 import map from "../assets/map.svg";
 import padlock from "../assets/padlock.svg";
-import phone from "../assets/phone.svg";
+import phones from "../assets/phone.svg";
 
-const Icon = () => {
+const Icon = ({ user, handleMouseOver }) => {
+  const { name, location, gender, email, phone, login, dob } = user;
   return (
     <Container>
       <Row>
         <Col xs={6} md={4} lg={2}>
-          <Image src={man} className="img" roundedCircle />
+          <Image
+            onMouseOver={handleMouseOver}
+            src={gender === "male" ? man : woman}
+            className="img"
+            roundedCircle
+            value={name}
+          />
         </Col>
         <Col xs={6} md={4} lg={2}>
           <Image src={mail} className="img" roundedCircle />
