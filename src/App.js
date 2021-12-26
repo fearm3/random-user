@@ -1,6 +1,5 @@
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import "./App.css";
-// import Icon from "./components/Icon";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -16,7 +15,8 @@ import phones from "./assets/phone.svg";
 function App() {
   const [users, setUsers] = useState([]);
   const [values, setValues] = useState("");
-  const [title, setTitle] = useState("");
+  const [userInfo, setUserInfo] = useState([]);//add user
+  const [currentData, setCurrentData] = useState({});
 
   const baseUrl = "https://randomuser.me/api/";
 
@@ -27,23 +27,58 @@ function App() {
     // console.log(data.results);
     const person = data.results;
     setUsers(person);
-    console.log(person);
+    setCurrentData({
+      title: `name`,
+      info:
+        person[0].name.title +
+        " " +
+        person[0].name.first +
+        " " +
+        person[0].name.last,
+    });
+    console.log(currentData);
   };
   useEffect(() => {
     getUsers();
   }, []);
 
-  const handleMouseOver = (e) => {
-    const newValues = users.name;
+  // const userData = () => {
+  //   axios.get("https://randomuser.me/api/").then((res) => {
+  //     setUserCard(res.data.results[0]);
+  //     setCurrentData({
+  //       title: "name",
+  //       info:
+  //         res.data.results[0].name.title +
+  //         " " +
+  //         res.data.results[0].name.first +
+  //         " " +
+  //         res.data.results[0].name.last,
+  //     });
+  //   });
+  // };
 
-    if (e.target.classList.contains("img")) {
-      const newValue = e.target.value;
-      console.log(e.target.value);
-      setValues(users[newValue]);
+  // setUserInfo([
+  //         ...userInfo, // önceki verileri tutnak için kullandık.
+  //         {
+  //           name: userCard?.name?.first,
+  //           email: userCard?.email,
+  //           phone: userCard?.phone,
+  //           age: userCard?.dob?.age,
+  //         },
+  //       ]);
+  //     }
 
-      console.log(newValue);
-    }
-  };
+  // const createUser = () => {
+  //   setUserInfo([
+  //     ...userInfo,
+  //     {
+  //       name: users?.name.first,
+  //       email: users?.email,
+  //       phone: users?.phone,
+  //       age: users?.dob?.age,
+  //     },
+  //   ]);
+  // };
 
   return (
     <div className="App">
@@ -62,8 +97,16 @@ function App() {
               </Col>
             </Row>
             <Card.Body>
-              <Card.Text>{values}</Card.Text>
-              <Card.Title>Special title treatment</Card.Title>
+              {currentData ? (
+                <Card.Text>
+                  My {currentData.title} is <br />
+                  {currentData.info}
+                </Card.Text>
+              ) : (
+                <Card.Text style={{ color: "white" }}>
+                  a <br /> a
+                </Card.Text>
+              )}
 
               <Container>
                 <Row>
@@ -73,7 +116,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={name.fist}
-                      onMouseOver={handleMouseOver}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "name",
+                          info: `${name.first} ${name.last}`,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                   <Col xs={6} md={4} lg={2}>
@@ -82,6 +131,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={email}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "email",
+                          info: email,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                   <Col xs={6} md={4} lg={2}>
@@ -118,12 +174,13 @@ function App() {
                   </Col>
                 </Row>
               </Container>
-
               <div className="btn">
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary" onClick={getUsers}>
+                  Random User
+                </Button>
               </div>
               <div className="btn">
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary">Add User</Button>
               </div>
             </Card.Body>
           </Card>
