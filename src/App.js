@@ -15,7 +15,7 @@ import phones from "./assets/phone.svg";
 function App() {
   const [users, setUsers] = useState([]);
   const [values, setValues] = useState("");
-  const [userInfo, setUserInfo] = useState([]);//add user
+  const [userInfo, setUserInfo] = useState([]); //add user
   const [currentData, setCurrentData] = useState({});
 
   const baseUrl = "https://randomuser.me/api/";
@@ -28,7 +28,7 @@ function App() {
     const person = data.results;
     setUsers(person);
     setCurrentData({
-      title: `name`,
+      title: "name",
       info:
         person[0].name.title +
         " " +
@@ -41,21 +41,6 @@ function App() {
   useEffect(() => {
     getUsers();
   }, []);
-
-  // const userData = () => {
-  //   axios.get("https://randomuser.me/api/").then((res) => {
-  //     setUserCard(res.data.results[0]);
-  //     setCurrentData({
-  //       title: "name",
-  //       info:
-  //         res.data.results[0].name.title +
-  //         " " +
-  //         res.data.results[0].name.first +
-  //         " " +
-  //         res.data.results[0].name.last,
-  //     });
-  //   });
-  // };
 
   // setUserInfo([
   //         ...userInfo, // önceki verileri tutnak için kullandık.
@@ -104,7 +89,7 @@ function App() {
                 </Card.Text>
               ) : (
                 <Card.Text style={{ color: "white" }}>
-                  a <br /> a
+                  ad <br /> asd
                 </Card.Text>
               )}
 
@@ -146,6 +131,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={dob.age}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "age",
+                          info: dob.age,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                   <Col xs={6} md={4} lg={2}>
@@ -154,6 +146,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={location.street.number + location.street.name}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "street",
+                          info: location.street.number + location.street.name,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                   <Col xs={6} md={4} lg={2}>
@@ -162,6 +161,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={phone}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "phone",
+                          info: phone,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                   <Col xs={6} md={4} lg={2}>
@@ -170,6 +176,13 @@ function App() {
                       className="img"
                       roundedCircle
                       value={login.password}
+                      onMouseOver={() => {
+                        setCurrentData({
+                          title: "password",
+                          info: login.password,
+                        });
+                      }}
+                      onMouseLeave={() => setCurrentData("")}
                     />
                   </Col>
                 </Row>
