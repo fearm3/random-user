@@ -11,10 +11,11 @@ import growingWoman from "./assets/growing-up-woman.svg";
 import map from "./assets/map.svg";
 import padlock from "./assets/padlock.svg";
 import phones from "./assets/phone.svg";
+import MyTable from "./components/MyTable";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [values, setValues] = useState("");
+  const [visible, setVisible] = useState(false);
   const [userInfo, setUserInfo] = useState([]); //add user
   const [currentData, setCurrentData] = useState({});
 
@@ -70,7 +71,7 @@ function App() {
       {users.map((user, index) => {
         const { name, location, gender, email, phone, login, dob } = user;
         return (
-          <Card className="text-center" key={index}>
+          <Card className="card text-center" key={index}>
             <Card.Header className="header"></Card.Header>
             <Row>
               <Col>
@@ -149,7 +150,7 @@ function App() {
                       onMouseOver={() => {
                         setCurrentData({
                           title: "street",
-                          info: location.street.number + location.street.name,
+                          info: `${location.street.number}  ${location.street.name}`,
                         });
                       }}
                       onMouseLeave={() => setCurrentData("")}
@@ -193,9 +194,12 @@ function App() {
                 </Button>
               </div>
               <div className="btn">
-                <Button variant="primary">Add User</Button>
+                <Button variant="primary" onClick={() => setVisible(true)}>
+                  Add User
+                </Button>
               </div>
             </Card.Body>
+            {visible && <MyTable user={user} />}
           </Card>
         );
       })}
