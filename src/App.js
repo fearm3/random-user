@@ -190,7 +190,7 @@ function App() {
               </Container>
               <div className="btn">
                 <Button variant="primary" onClick={getUsers}>
-                  Random User
+                  New User
                 </Button>
               </div>
               <div className="btn">
