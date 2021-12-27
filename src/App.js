@@ -105,7 +105,7 @@ function App() {
 
   return (
     <div className="App">
-      {users.map((user, index) => {
+      {users?.map((user, index) => {
         const { name, location, gender, email, phone, login, dob } = user;
         return (
           <Card className="card text-center" key={index}>
@@ -226,7 +226,7 @@ function App() {
                 </Row>
               </Container>
               <div className="btn">
-                <Button variant="primary" onClick={getUsers}>
+                <Button variant="primary" onClick={() => getUsers()}>
                   New User
                 </Button>
               </div>
