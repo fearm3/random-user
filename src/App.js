@@ -1,6 +1,5 @@
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import "./App.css";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import man from "./assets/man.svg";
@@ -15,9 +14,8 @@ import MyTable from "./components/MyTable";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [addUser, setAddUser] = useState([]);//1
+  const [addUser, setAddUser] = useState([]); //1
   const [visible, setVisible] = useState(false);
-  // const [userInfo, setUserInfo] = useState([]); //add user
   const [currentData, setCurrentData] = useState({});
 
   const getUsers = async () => {
@@ -38,11 +36,9 @@ function App() {
         " " +
         person[0].name.last,
     });
-   
   };
   useEffect(() => {
     getUsers();
-    
   }, []);
 
   const newUser = () => {
@@ -50,6 +46,13 @@ function App() {
   };
   console.log(addUser);
 
+  const deleteUser = (deletedEmail) => {
+    if (addUser.length) {
+      setAddUser(addUser?.filter((item) => item[0]?.email !== deletedEmail));
+    } else {
+      setVisible(false);
+    }
+  };
   return (
     <div className="App">
       {users?.map((user, index) => {
@@ -189,7 +192,7 @@ function App() {
                 </Button>
               </div>
             </Card.Body>
-            {visible && <MyTable user={addUser} />}
+            {visible && <MyTable user={addUser} deleteUser={deleteUser} />}
           </Card>
         );
       })}
