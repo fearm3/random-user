@@ -13,21 +13,30 @@ import padlock from "./assets/padlock.svg";
 import phones from "./assets/phone.svg";
 import MyTable from "./components/MyTable";
 
+// const getLocalStorage = () => {
+//   let getData = localStorage.getItem("myData");
+//   if (getData) {
+//     return JSON.parse(localStorage.getItem("myData"));
+//   } else {
+//     return [];
+//   }
+// };
+
 function App() {
   const [users, setUsers] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [userInfo, setUserInfo] = useState([]); //add user
+  // const [userInfo, setUserInfo] = useState([]); //add user
   const [currentData, setCurrentData] = useState({});
 
-  const baseUrl = "https://randomuser.me/api/";
-
   const getUsers = async () => {
+    const baseUrl = "https://randomuser.me/api/";
     // const res = await axios.get(baseUrl);
     const { data } = await axios.get(baseUrl);
     // console.log(data);
     // console.log(data.results);
     const person = data.results;
     setUsers(person);
+
     setCurrentData({
       title: "name",
       info:
@@ -37,10 +46,22 @@ function App() {
         " " +
         person[0].name.last,
     });
-    console.log(currentData);
+    // console.log(currentData);
   };
+  // useEffect(() => {
+  //   const myUser = localStorage.getItem("myData");
+  //   if (myUser) {
+  //     setLocalUser(JSON.parse(myUser));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("myData", JSON.stringify(users));
+  // }, [users]);
+
   useEffect(() => {
     getUsers();
+    // setUserInfo(users);
   }, []);
 
   // setUserInfo([
@@ -64,6 +85,22 @@ function App() {
   //       age: users?.dob?.age,
   //     },
   //   ]);
+  // };
+  // const createUser = () => {
+  //   if (userInfo.filter((user) => user.email === users.email).length > 0) {
+  //     alert("You have already added...");
+  //   } else {
+  //     setUserInfo([
+  //       ...userInfo, // önceki verileri tutnak için kullandık.
+  //       {
+  //         name: users?.name?.first,
+  //         email: users?.email,
+  //         phone: users?.phone,
+  //         age: users?.dob?.age,
+  //       },
+  //     ]);
+  //   }
+  //   setVisible(true);
   // };
 
   return (
@@ -194,7 +231,12 @@ function App() {
                 </Button>
               </div>
               <div className="btn">
-                <Button variant="primary" onClick={() => setVisible(true)}>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setVisible(true);
+                  }}
+                >
                   Add User
                 </Button>
               </div>

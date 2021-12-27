@@ -3,7 +3,8 @@ import { Table } from "react-bootstrap";
 import { MdAutoDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 const MyTable = ({ user }) => {
-  console.log(user);
+  console.log("user", user);
+
   const { name, email, phone, dob } = user;
   return (
     <Table striped bordered hover size="sm">
