@@ -13,17 +13,9 @@ import padlock from "./assets/padlock.svg";
 import phones from "./assets/phone.svg";
 import MyTable from "./components/MyTable";
 
-// const getLocalStorage = () => {
-//   let getData = localStorage.getItem("myData");
-//   if (getData) {
-//     return JSON.parse(localStorage.getItem("myData"));
-//   } else {
-//     return [];
-//   }
-// };
-
 function App() {
   const [users, setUsers] = useState([]);
+  const [addUser, setAddUser] = useState([]);//1
   const [visible, setVisible] = useState(false);
   // const [userInfo, setUserInfo] = useState([]); //add user
   const [currentData, setCurrentData] = useState({});
@@ -46,62 +38,17 @@ function App() {
         " " +
         person[0].name.last,
     });
-    // console.log(currentData);
+   
   };
-  // useEffect(() => {
-  //   const myUser = localStorage.getItem("myData");
-  //   if (myUser) {
-  //     setLocalUser(JSON.parse(myUser));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("myData", JSON.stringify(users));
-  // }, [users]);
-
   useEffect(() => {
     getUsers();
-    // setUserInfo(users);
+    
   }, []);
 
-  // setUserInfo([
-  //         ...userInfo, // önceki verileri tutnak için kullandık.
-  //         {
-  //           name: userCard?.name?.first,
-  //           email: userCard?.email,
-  //           phone: userCard?.phone,
-  //           age: userCard?.dob?.age,
-  //         },
-  //       ]);
-  //     }
-
-  // const createUser = () => {
-  //   setUserInfo([
-  //     ...userInfo,
-  //     {
-  //       name: users?.name.first,
-  //       email: users?.email,
-  //       phone: users?.phone,
-  //       age: users?.dob?.age,
-  //     },
-  //   ]);
-  // };
-  // const createUser = () => {
-  //   if (userInfo.filter((user) => user.email === users.email).length > 0) {
-  //     alert("You have already added...");
-  //   } else {
-  //     setUserInfo([
-  //       ...userInfo, // önceki verileri tutnak için kullandık.
-  //       {
-  //         name: users?.name?.first,
-  //         email: users?.email,
-  //         phone: users?.phone,
-  //         age: users?.dob?.age,
-  //       },
-  //     ]);
-  //   }
-  //   setVisible(true);
-  // };
+  const newUser = () => {
+    setAddUser([...addUser, users]);
+  };
+  console.log(addUser);
 
   return (
     <div className="App">
@@ -235,18 +182,18 @@ function App() {
                   variant="primary"
                   onClick={() => {
                     setVisible(true);
+                    newUser();
                   }}
                 >
                   Add User
                 </Button>
               </div>
             </Card.Body>
-            {visible && <MyTable user={user} />}
+            {visible && <MyTable user={addUser} />}
           </Card>
         );
       })}
     </div>
   );
 }
-
 export default App;
