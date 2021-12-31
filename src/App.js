@@ -51,6 +51,7 @@ function App() {
       setAddUser(addUser?.filter((item) => item[0]?.email !== deletedEmail));
     } else {
       setVisible(false);
+      setAddUser([]);
     }
   };
   return (
@@ -184,15 +185,16 @@ function App() {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    setVisible(true);
-                    newUser();
+                    addUser.includes(users)
+                      ? alert("This User is added before !!?")
+                      : newUser();
                   }}
                 >
                   Add User
                 </Button>
               </div>
             </Card.Body>
-            {visible && <MyTable user={addUser} deleteUser={deleteUser} />}
+            <MyTable user={addUser} deleteUser={deleteUser} />
           </Card>
         );
       })}
