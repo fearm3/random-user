@@ -15,7 +15,6 @@ import MyTable from "./components/MyTable";
 function App() {
   const [users, setUsers] = useState([]);
   const [addUser, setAddUser] = useState([]); //1
-  const [visible, setVisible] = useState(false);
   const [currentData, setCurrentData] = useState({});
 
   const getUsers = async () => {
@@ -50,7 +49,6 @@ function App() {
     if (addUser.length) {
       setAddUser(addUser?.filter((item) => item[0]?.email !== deletedEmail));
     } else {
-      setVisible(false);
       setAddUser([]);
     }
   };

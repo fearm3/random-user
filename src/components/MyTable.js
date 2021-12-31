@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Card, Table } from "react-bootstrap";
 import { MdAutoDelete } from "react-icons/md";
 const MyTable = ({ user, deleteUser }) => {
   // console.log("user", user);
@@ -8,7 +8,7 @@ const MyTable = ({ user, deleteUser }) => {
     <Table className="table-container">
       {user.length > 0 && (
         <Table striped bordered hover size="sm">
-          <thead>
+          <thead className="thead">
             <tr>
               <th>First Name</th>
               <th>Email</th>
@@ -26,7 +26,7 @@ const MyTable = ({ user, deleteUser }) => {
                 <td>{item[0]?.dob?.age}</td>
                 <td>
                   <MdAutoDelete
-                    className="me-3"
+                    className="icon me-3"
                     onClick={() => deleteUser(item[0]?.email)}
                   />
                 </td>
