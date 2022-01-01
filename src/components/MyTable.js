@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { MdAutoDelete } from "react-icons/md";
 const MyTable = ({ user, deleteUser }) => {
   // console.log("user", user);
